@@ -1,0 +1,304 @@
+:root {
+  --paper: #f4f5f1;
+  --ink: #1e1e1e;
+  --grid: #26170e;
+  --dad: #0cc0df;
+  --mom: #ff66c4;
+  --school: #ff8856;
+  --helper: #d693ff;
+  --cell-min: 86px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--paper);
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    linear-gradient(rgba(244, 245, 241, 0.9), rgba(244, 245, 241, 0.9)),
+    repeating-linear-gradient(0deg, transparent 0 5px, rgba(30, 30, 30, 0.018) 5px 6px);
+  font-family: "Patrick Hand", "Comic Sans MS", cursive;
+}
+
+button {
+  font: inherit;
+}
+
+main {
+  width: min(100%, 780px);
+  margin: 0 auto;
+  padding: 32px 22px 88px;
+}
+
+.legend {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 38px;
+  padding: 0 2px;
+}
+
+.legend-item {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  padding: 4px;
+  color: var(--ink);
+  background: transparent;
+  cursor: pointer;
+  font-size: 21px;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.legend-item:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
+
+.legend-item[aria-pressed="true"] .swatch {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.swatch {
+  width: 25px;
+  height: 18px;
+  flex: 0 0 auto;
+  border-radius: 44% 55% 47% 53%;
+  transform: rotate(-2deg);
+}
+
+.swatch-dad { background: var(--dad); }
+.swatch-mom { background: var(--mom); transform: rotate(2deg); }
+.swatch-school { background: var(--school); transform: rotate(-1deg); }
+.swatch-helper { background: var(--helper); transform: rotate(3deg); }
+
+.month {
+  margin: 0 0 72px;
+}
+
+.month-title {
+  margin: 0 0 16px;
+  color: #050505;
+  font-family: "Anton", Impact, sans-serif;
+  font-size: clamp(66px, 15vw, 126px);
+  font-weight: 400;
+  line-height: 0.82;
+  letter-spacing: 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.weekday-grid,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.weekday {
+  padding: 7px 2px 8px;
+  border-bottom: 2px solid var(--grid);
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.day {
+  position: relative;
+  min-width: 0;
+  min-height: var(--cell-min);
+  border-right: 1px solid var(--grid);
+  border-bottom: 1px solid var(--grid);
+  overflow: visible;
+}
+
+.day:nth-child(7n + 1) {
+  border-left: 1px solid var(--grid);
+}
+
+.day.empty {
+  opacity: 0.32;
+}
+
+.date-number {
+  display: block;
+  position: relative;
+  z-index: 3;
+  width: fit-content;
+  padding: 4px 5px 2px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.events {
+  display: flex;
+  position: relative;
+  z-index: 2;
+  flex-direction: column;
+  gap: 3px;
+  padding: 1px 2px 5px;
+}
+
+.event {
+  display: flex;
+  min-height: 18px;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 3px;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.18);
+  overflow-wrap: anywhere;
+}
+
+.event-dad { background: var(--dad); }
+.event-mom { background: var(--mom); }
+.event-school { background: var(--school); }
+.event-helper { background: var(--helper); }
+
+.event.is-muted {
+  opacity: 0.1;
+}
+
+.travel {
+  position: absolute;
+  z-index: 5;
+  top: 4px;
+  right: 3px;
+  width: 24px;
+  height: 24px;
+  color: var(--ink);
+  font-family: Arial, sans-serif;
+  font-size: 17px;
+  line-height: 24px;
+  text-align: center;
+}
+
+.travel.depart {
+  transform: rotate(-38deg);
+}
+
+.travel.arrive {
+  transform: rotate(142deg);
+}
+
+.due-ring {
+  position: absolute;
+  z-index: 1;
+  top: 10px;
+  left: 50%;
+  width: 62px;
+  height: 62px;
+  transform: translateX(-50%) rotate(-5deg);
+  border: 5px solid var(--mom);
+  border-radius: 50% 46% 52% 48%;
+}
+
+.due-ring::after {
+  content: "Today";
+  position: absolute;
+  top: 26px;
+  left: 50%;
+  transform: translateX(-50%) rotate(5deg);
+  color: var(--mom);
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+@media (max-width: 620px) {
+  :root {
+    --cell-min: 72px;
+  }
+
+  main {
+    padding: 24px 7px 60px;
+  }
+
+  .legend {
+    gap: 4px;
+    margin-bottom: 30px;
+  }
+
+  .legend-item {
+    gap: 4px;
+    font-size: 16px;
+  }
+
+  .swatch {
+    width: 19px;
+    height: 14px;
+  }
+
+  .month {
+    margin-bottom: 58px;
+  }
+
+  .month-title {
+    margin-bottom: 12px;
+    font-size: clamp(56px, 20vw, 92px);
+  }
+
+  .weekday {
+    font-size: 9px;
+  }
+
+  .date-number {
+    padding: 3px 3px 2px;
+    font-size: 10px;
+  }
+
+  .events {
+    gap: 2px;
+    padding: 1px;
+  }
+
+  .event {
+    min-height: 16px;
+    padding: 2px 1px;
+    font-size: 10px;
+  }
+
+  .travel {
+    top: 2px;
+    right: 0;
+    font-size: 14px;
+  }
+
+  .due-ring {
+    top: 8px;
+    width: 52px;
+    height: 52px;
+    border-width: 4px;
+  }
+
+  .due-ring::after {
+    top: 22px;
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .event,
+  .swatch {
+    transition: opacity 160ms ease, outline-color 160ms ease;
+  }
+}

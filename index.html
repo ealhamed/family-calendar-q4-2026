@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f5f1" />
+    <title>Family Calendar | October to December 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Patrick+Hand&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <header class="legend" aria-label="Calendar categories">
+        <button class="legend-item" type="button" data-filter="dad" aria-pressed="false">
+          <span class="swatch swatch-dad" aria-hidden="true"></span>
+          <span>Dad</span>
+        </button>
+        <button class="legend-item" type="button" data-filter="mom" aria-pressed="false">
+          <span class="swatch swatch-mom" aria-hidden="true"></span>
+          <span>Mom</span>
+        </button>
+        <button class="legend-item" type="button" data-filter="school" aria-pressed="false">
+          <span class="swatch swatch-school" aria-hidden="true"></span>
+          <span>School</span>
+        </button>
+        <button class="legend-item" type="button" data-filter="helper" aria-pressed="false">
+          <span class="swatch swatch-helper" aria-hidden="true"></span>
+          <span>Helper</span>
+        </button>
+      </header>
+
+      <div id="calendar" aria-live="polite"></div>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
