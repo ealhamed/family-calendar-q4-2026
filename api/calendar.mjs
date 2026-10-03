@@ -110,7 +110,8 @@ function isSameOrigin(req) {
       .map((value) => value.trim().replace(/\/$/, ""))
       .filter(Boolean),
   );
-  if (!origin || (hosts.size === 0 && configuredOrigins.size === 0)) return false;
+  if (!origin) return req.method === "GET";
+  if (hosts.size === 0 && configuredOrigins.size === 0) return false;
 
   try {
     const parsedOrigin = new URL(origin);

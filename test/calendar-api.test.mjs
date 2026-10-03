@@ -93,6 +93,20 @@ test("API accepts the configured canonical origin behind Vercel routing", async 
   assert.equal(res.statusCode, 200);
 });
 
+test("GET works when a same-origin browser omits the Origin header", async () => {
+  globalThis.fetch = async () => new Response(JSON.stringify({
+    sha: "abc123",
+    content: Buffer.from(`${JSON.stringify(calendar)}\n`).toString("base64"),
+  }), { status: 200 });
+  const req = request("GET", "482915");
+  delete req.headers.origin;
+  const res = responseRecorder();
+
+  await handler(req, res);
+
+  assert.equal(res.statusCode, 200);
+});
+
 test("POST commits a validated calendar against the editor revision", async () => {
   let requestOptions;
   globalThis.fetch = async (_url, options) => {
