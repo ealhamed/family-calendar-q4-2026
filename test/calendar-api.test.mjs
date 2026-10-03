@@ -63,6 +63,20 @@ test("GET returns the current GitHub-backed calendar and revision", async () => 
   assert.deepEqual(res.body.calendar, calendar);
 });
 
+test("API accepts the browser origin when Vercel adds a different forwarded host", async () => {
+  globalThis.fetch = async () => new Response(JSON.stringify({
+    sha: "abc123",
+    content: Buffer.from(`${JSON.stringify(calendar)}\n`).toString("base64"),
+  }), { status: 200 });
+  const req = request("GET", "482915");
+  req.headers["x-forwarded-host"] = "internal-deployment.vercel.app";
+  const res = responseRecorder();
+
+  await handler(req, res);
+
+  assert.equal(res.statusCode, 200);
+});
+
 test("POST commits a validated calendar against the editor revision", async () => {
   let requestOptions;
   globalThis.fetch = async (_url, options) => {

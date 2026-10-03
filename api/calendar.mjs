@@ -98,11 +98,16 @@ function githubConfig() {
 
 function isSameOrigin(req) {
   const origin = req.headers.origin;
-  const host = req.headers["x-forwarded-host"] || req.headers.host;
-  if (!origin || !host) return false;
+  const hosts = new Set([
+    req.headers.host,
+    req.headers["x-forwarded-host"],
+    process.env.VERCEL_PROJECT_PRODUCTION_URL,
+    process.env.VERCEL_URL,
+  ].filter(Boolean));
+  if (!origin || hosts.size === 0) return false;
 
   try {
-    return new URL(origin).host === host;
+    return hosts.has(new URL(origin).host);
   } catch {
     return false;
   }
