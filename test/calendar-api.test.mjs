@@ -28,6 +28,7 @@ beforeEach(() => {
   );
   process.env.GITHUB_CALENDAR_TOKEN = "test-token";
   process.env.GITHUB_CALENDAR_REPOSITORY = "ealhamed/family-calendar-q4-2026";
+  process.env.FAMILY_CALENDAR_ALLOWED_ORIGINS = "https://family-calendar-q4-2026.vercel.app";
 });
 
 afterEach(() => {
@@ -70,6 +71,21 @@ test("API accepts the browser origin when Vercel adds a different forwarded host
   }), { status: 200 });
   const req = request("GET", "482915");
   req.headers["x-forwarded-host"] = "internal-deployment.vercel.app";
+  const res = responseRecorder();
+
+  await handler(req, res);
+
+  assert.equal(res.statusCode, 200);
+});
+
+test("API accepts the configured canonical origin behind Vercel routing", async () => {
+  globalThis.fetch = async () => new Response(JSON.stringify({
+    sha: "abc123",
+    content: Buffer.from(`${JSON.stringify(calendar)}\n`).toString("base64"),
+  }), { status: 200 });
+  const req = request("GET", "482915");
+  req.headers.host = "internal-host.vercel.app";
+  req.headers["x-forwarded-host"] = "internal-forwarded.vercel.app";
   const res = responseRecorder();
 
   await handler(req, res);

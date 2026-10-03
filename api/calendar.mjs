@@ -104,10 +104,17 @@ function isSameOrigin(req) {
     process.env.VERCEL_PROJECT_PRODUCTION_URL,
     process.env.VERCEL_URL,
   ].filter(Boolean));
-  if (!origin || hosts.size === 0) return false;
+  const configuredOrigins = new Set(
+    (process.env.FAMILY_CALENDAR_ALLOWED_ORIGINS || "")
+      .split(",")
+      .map((value) => value.trim().replace(/\/$/, ""))
+      .filter(Boolean),
+  );
+  if (!origin || (hosts.size === 0 && configuredOrigins.size === 0)) return false;
 
   try {
-    return hosts.has(new URL(origin).host);
+    const parsedOrigin = new URL(origin);
+    return hosts.has(parsedOrigin.host) || configuredOrigins.has(parsedOrigin.origin);
   } catch {
     return false;
   }
