@@ -6,39 +6,142 @@
       "year": 2026,
       "month": 9,
       "events": [
-        { "id": "dad-dubai-2026-10-01", "startDay": 1, "endDay": 3, "category": "dad", "label": "Dubai" },
-        { "id": "mom-week-28-appointment", "startDay": 6, "endDay": 6, "category": "mom", "label": "Week 28 appointment" },
-        { "id": "dad-argentina-2026-10", "startDay": 15, "endDay": 31, "category": "dad", "label": "Argentina" },
-        { "id": "school-day-off-2026-10-25", "startDay": 25, "endDay": 25, "category": "school", "label": "Day off" },
-        { "id": "school-grandparents-week-2026-10", "startDay": 26, "endDay": 29, "category": "school", "label": "Grandparents week" },
-        { "id": "helper-trip-2026-10", "startDay": 27, "endDay": 31, "category": "helper", "label": "Helper trip" }
+        {
+          "id": "dad-dubai-2026-10-01",
+          "startDay": 1,
+          "endDay": 3,
+          "category": "dad",
+          "label": "Dubai"
+        },
+        {
+          "id": "mom-week-28-appointment",
+          "startDay": 6,
+          "endDay": 6,
+          "category": "mom",
+          "label": "Week 28 appointment"
+        },
+        {
+          "id": "dad-argentina-2026-10",
+          "startDay": 15,
+          "endDay": 31,
+          "category": "dad",
+          "label": "Argentina"
+        },
+        {
+          "id": "school-day-off-2026-10-25",
+          "startDay": 25,
+          "endDay": 25,
+          "category": "school",
+          "label": "Day off"
+        },
+        {
+          "id": "school-grandparents-week-2026-10",
+          "startDay": 26,
+          "endDay": 29,
+          "category": "school",
+          "label": "Grandparents week"
+        },
+        {
+          "id": "helper-trip-2026-10",
+          "startDay": 27,
+          "endDay": 31,
+          "category": "helper",
+          "label": "Helper trip"
+        }
       ],
-      "travel": { "1": "depart", "3": "arrive", "15": "depart", "27": "depart", "31": "arrive" }
+      "travel": {
+        "1": "depart",
+        "3": "arrive",
+        "15": "depart",
+        "27": "depart",
+        "31": "arrive"
+      }
     },
     {
       "name": "November",
       "year": 2026,
       "month": 10,
       "events": [
-        { "id": "helper-trip-2026-11", "startDay": 1, "endDay": 27, "category": "helper", "label": "Helper trip" },
-        { "id": "school-parents-meet-up-2026-11-11", "startDay": 11, "endDay": 11, "category": "school", "label": "Parents meet up" },
-        { "id": "dad-dubai-2026-11", "startDay": 15, "endDay": 22, "category": "dad", "label": "Dubai" },
-        { "id": "school-autumn-break-2026-11-a", "startDay": 22, "endDay": 26, "category": "school", "label": "Autumn break" },
-        { "id": "school-autumn-break-2026-11-b", "startDay": 29, "endDay": 29, "category": "school", "label": "Autumn break" },
-        { "id": "dad-london-2026-11", "startDay": 28, "endDay": 30, "category": "dad", "label": "London" }
+        {
+          "id": "helper-trip-2026-11",
+          "startDay": 1,
+          "endDay": 27,
+          "category": "helper",
+          "label": "Helper trip"
+        },
+        {
+          "id": "school-parents-meet-up-2026-11-11",
+          "startDay": 11,
+          "endDay": 11,
+          "category": "school",
+          "label": "Parents meet up"
+        },
+        {
+          "id": "dad-dubai-2026-11",
+          "startDay": 15,
+          "endDay": 22,
+          "category": "dad",
+          "label": "Dubai"
+        },
+        {
+          "id": "school-autumn-break-2026-11-a",
+          "startDay": 22,
+          "endDay": 26,
+          "category": "school",
+          "label": "Autumn break"
+        },
+        {
+          "id": "school-autumn-break-2026-11-b",
+          "startDay": 29,
+          "endDay": 29,
+          "category": "school",
+          "label": "Autumn break"
+        },
+        {
+          "id": "dad-london-2026-11",
+          "startDay": 28,
+          "endDay": 30,
+          "category": "dad",
+          "label": "London"
+        }
       ],
-      "travel": { "15": "depart", "22": "arrive", "27": "arrive", "28": "depart" }
+      "travel": {
+        "15": "depart",
+        "22": "arrive",
+        "27": "arrive",
+        "28": "depart"
+      }
     },
     {
       "name": "December",
       "year": 2026,
       "month": 11,
       "events": [
-        { "id": "dad-london-2026-12", "startDay": 1, "endDay": 5, "category": "dad", "label": "London" },
-        { "id": "mom-due-2026-12-12", "startDay": 12, "endDay": 12, "category": "mom", "label": "DUE" },
-        { "id": "dad-dubai-2026-12", "startDay": 14, "endDay": 20, "category": "dad", "label": "Dubai" }
+        {
+          "id": "dad-london-2026-12",
+          "startDay": 1,
+          "endDay": 5,
+          "category": "dad",
+          "label": "London"
+        },
+        {
+          "id": "mom-due-2026-12-12",
+          "startDay": 12,
+          "endDay": 12,
+          "category": "mom",
+          "label": "DUE"
+        },
+        {
+          "id": "dad-dubai-2026-12",
+          "startDay": 14,
+          "endDay": 20,
+          "category": "dad",
+          "label": "Dubai"
+        }
       ],
-      "travel": { "5": "arrive" },
+      "travel": {
+        "5": "arrive"
+      },
       "due": 12
     }
   ]
