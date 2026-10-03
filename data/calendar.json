@@ -47,13 +47,6 @@
           "endDay": 31,
           "category": "helper",
           "label": "Helper trip"
-        },
-        {
-          "id": "mom-editor-verification-2026-10-04-f9b9a6ed",
-          "startDay": 4,
-          "endDay": 4,
-          "category": "mom",
-          "label": "Editor verification"
         }
       ],
       "travel": {
