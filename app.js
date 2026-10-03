@@ -5,71 +5,23 @@ const categories = {
   helper: "Helper",
 };
 
-const months = [
-  {
-    name: "October",
-    year: 2026,
-    month: 9,
-    events: [
-      ...range(1, 3, "dad", "Dubai"),
-      { day: 6, category: "mom", label: "Week 28 appointment" },
-      ...range(15, 31, "dad", "Argentina"),
-      { day: 25, category: "school", label: "Day off" },
-      ...range(26, 29, "school", "Grandparents week"),
-      ...range(27, 31, "helper", "Helper trip"),
-    ],
-    travel: {
-      1: "depart",
-      3: "arrive",
-      15: "depart",
-      27: "depart",
-      31: "arrive",
-    },
-  },
-  {
-    name: "November",
-    year: 2026,
-    month: 10,
-    events: [
-      ...range(1, 27, "helper", "Helper trip"),
-      { day: 11, category: "school", label: "Parents meet up" },
-      ...range(15, 22, "dad", "Dubai"),
-      ...[22, 23, 24, 25, 26, 29].map((day) => ({
-        day,
-        category: "school",
-        label: "Autumn break",
-      })),
-      ...range(28, 30, "dad", "London"),
-    ],
-    travel: {
-      15: "depart",
-      22: "arrive",
-      27: "arrive",
-      28: "depart",
-    },
-  },
-  {
-    name: "December",
-    year: 2026,
-    month: 11,
-    events: [
-      ...range(1, 5, "dad", "London"),
-      { day: 12, category: "mom", label: "DUE" },
-      ...range(14, 20, "dad", "Dubai"),
-    ],
-    travel: {
-      5: "arrive",
-    },
-    due: 12,
-  },
-];
+const calendar = document.querySelector("#calendar");
+let activeFilter = null;
 
-function range(start, end, category, label) {
-  return Array.from({ length: end - start + 1 }, (_, index) => ({
-    day: start + index,
-    category,
-    label,
-  }));
+loadCalendar();
+
+async function loadCalendar() {
+  try {
+    const response = await fetch("./data/calendar.json", { cache: "no-store" });
+    if (!response.ok) throw new Error(`Calendar data returned ${response.status}`);
+
+    const data = await response.json();
+    data.months.forEach((month) => calendar.append(renderMonth(month)));
+    bindFilters();
+  } catch (error) {
+    console.error(error);
+    calendar.innerHTML = '<p class="calendar-error">The calendar could not be loaded. Please try again.</p>';
+  }
 }
 
 function renderMonth(month) {
@@ -118,7 +70,7 @@ function renderMonth(month) {
       const events = document.createElement("div");
       events.className = "events";
       month.events
-        .filter((event) => event.day === day)
+        .filter((event) => day >= eventStart(event) && day <= eventEnd(event))
         .forEach((event) => {
           const item = document.createElement("div");
           item.className = `event event-${event.category}`;
@@ -129,13 +81,13 @@ function renderMonth(month) {
         });
       dayCell.append(events);
 
-      if (month.travel[day]) {
+      if (month.travel[String(day)]) {
         const travel = document.createElement("span");
-        travel.className = `travel ${month.travel[day]}`;
+        travel.className = `travel ${month.travel[String(day)]}`;
         travel.textContent = "✈";
         travel.setAttribute(
           "aria-label",
-          month.travel[day] === "depart" ? "Departure" : "Arrival",
+          month.travel[String(day)] === "depart" ? "Departure" : "Arrival",
         );
         dayCell.append(travel);
       }
@@ -157,24 +109,30 @@ function renderMonth(month) {
   return section;
 }
 
-const calendar = document.querySelector("#calendar");
-months.forEach((month) => calendar.append(renderMonth(month)));
+function eventStart(event) {
+  return event.day ?? event.startDay;
+}
 
-let activeFilter = null;
-document.querySelectorAll(".legend-item").forEach((button) => {
-  button.addEventListener("click", () => {
-    const selected = button.dataset.filter;
-    activeFilter = activeFilter === selected ? null : selected;
+function eventEnd(event) {
+  return event.day ?? event.endDay;
+}
 
-    document.querySelectorAll(".legend-item").forEach((item) => {
-      item.setAttribute("aria-pressed", String(item.dataset.filter === activeFilter));
-    });
+function bindFilters() {
+  document.querySelectorAll(".legend-item").forEach((button) => {
+    button.addEventListener("click", () => {
+      const selected = button.dataset.filter;
+      activeFilter = activeFilter === selected ? null : selected;
 
-    document.querySelectorAll(".event").forEach((event) => {
-      event.classList.toggle(
-        "is-muted",
-        activeFilter !== null && event.dataset.category !== activeFilter,
-      );
+      document.querySelectorAll(".legend-item").forEach((item) => {
+        item.setAttribute("aria-pressed", String(item.dataset.filter === activeFilter));
+      });
+
+      document.querySelectorAll(".event").forEach((event) => {
+        event.classList.toggle(
+          "is-muted",
+          activeFilter !== null && event.dataset.category !== activeFilter,
+        );
+      });
     });
   });
-});
+}

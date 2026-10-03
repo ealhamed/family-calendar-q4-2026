@@ -1,0 +1,9 @@
+{
+  "name": "family-calendar-q4-2026",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "serve": "npx vercel dev"
+  }
+}

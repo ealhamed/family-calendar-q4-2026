@@ -178,6 +178,13 @@ main {
   opacity: 0.1;
 }
 
+.calendar-error {
+  margin: 80px auto;
+  max-width: 420px;
+  font-size: 22px;
+  text-align: center;
+}
+
 .travel {
   position: absolute;
   z-index: 5;
